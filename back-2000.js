@@ -57,44 +57,27 @@ console.log(dp);
 
 // dp에  책을 넣을 수 있는 경우의 수를 저장합니다.
 
-function swap(arr, i, j) {
-    const temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-}
+for (let i = 1; i <= n; i++) {
+    for (let j = 0; j <= 2; j++) {
+        for (let k = 0; k <= Math.ceil(n / 3); k++) {
 
-function generatePermutations(arr, start, end, result) {
-    if (start === end) {
-        result.push(arr.slice()); // 현재 배열을 결과 배열에 추가
-    } else {
-        for (let i = start; i <= end; i++) {
-            swap(arr, start, i); // 배열 요소를 교환
-            generatePermutations(arr, start + 1, end, result); // 재귀적으로 순열 생성
-            swap(arr, start, i); // 원래 상태로 되돌림
         }
     }
 }
 
-function generateAllPermutations(arr) {
-    const result = [];
-    generatePermutations(arr, 0, arr.length - 1, result);
-    return result;
+function factorial(n) {
+    if (n === 0 || n === 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
 }
 
-const inputArray = [[10, 9, 8], [7, 6, 5], [4, 3, 2], [1,undefined,undefined]];
-const permutations = generateAllPermutations(inputArray);
-
-// console.log("주어진 배열의 모든 경우의 수:");
-// permutations.forEach((permutation, index) => {
-//     console.log(`${index + 1}: [${permutation}]`);
-// });
-console.log("총", permutations.length, "가지 경우의 수가 있습니다.");
-
-const BigNum = require('bignum');
-
-const factorial71 = BigNum(1);
-for (let i = 2; i <= 71; i++) {
-    factorial71.mul(i);
+function calculatePermutations(arr) {
+    const n = arr.length;
+    return factorial(n);
 }
 
-console.log("71! =", factorial71.toString());
+const inputArray = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+const permutations = calculatePermutations(inputArray);
+console.log("주어진 배열의 경우의 수:", permutations);
